@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 杂志专题</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fafaf9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", "Helvetica Neue", Arial, sans-serif;
+            color: #1e1e1e;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .magazine-wrapper {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* 首页横幅 — 极简留白 */
+        .hero {
+            padding: 5.5rem 0 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e6e4e2;
+        }
+
+        .hero__label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #8c8a86;
+            margin-bottom: 1.25rem;
+            border: 1px solid #dddcd8;
+            padding: 0.15rem 1rem;
+            border-radius: 30px;
+            background: #ffffff;
+        }
+
+        .hero__title {
+            font-size: 3rem;
+            font-weight: 350;
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            color: #1a1a18;
+            margin-bottom: 1rem;
+        }
+
+        .hero__sub {
+            font-size: 1rem;
+            color: #6a6864;
+            max-width: 440px;
+            margin: 0 auto 0.75rem;
+        }
+
+        .hero__sep {
+            display: inline-block;
+            width: 36px;
+            height: 2px;
+            background: #c8c5c0;
+            margin-top: 0.6rem;
+        }
+
+        /* 背景说明卡片 */
+        .background-note {
+            margin: 2.8rem 0 2rem;
+            padding: 2.2rem 2rem;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.02), 0 0 0 1px #f0eeec inset;
+        }
+
+        .background-note h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 1rem;
+            color: #2b2b28;
+        }
+
+        .background-note p {
+            font-size: 0.96rem;
+            color: #3d3b38;
+            margin-bottom: 1.2rem;
+        }
+
+        .background-note p:last-child {
+            margin-bottom: 0;
+        }
+
+        .background-note a {
+            color: #3f5147;
+            text-decoration: none;
+            border-bottom: 1px solid #bdc7be;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .background-note a:hover {
+            color: #1d2b23;
+            border-bottom-color: #1d2b23;
+        }
+
+        /* 三段自然介绍 */
+        .section-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2.8rem 0 3.2rem;
+        }
+
+        .story-card {
+            background: transparent;
+            border-radius: 0;
+            padding: 1.2rem 0;
+            border-top: 1px solid #e2dfdb;
+        }
+
+        .story-card:first-child {
+            border-top: none;
+        }
+
+        .story-card__number {
+            font-size: 0.75rem;
+            font-weight: 350;
+            color: #a39f99;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.3rem;
+        }
+
+        .story-card h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #252522;
+            margin-bottom: 0.6rem;
+            line-height: 1.4;
+        }
+
+        .story-card p {
+            font-size: 0.96rem;
+            color: #4a4844;
+            margin-bottom: 0.8rem;
+        }
+
+        .story-card p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .story-card a {
+            color: #3f5147;
+            text-decoration: none;
+            border-bottom: 1px solid #cbd3cb;
+            transition: border-color 0.15s;
+        }
+
+        .story-card a:hover {
+            border-bottom-color: #1d2b23;
+        }
+
+        /* 页尾访问提示 */
+        .footer-note {
+            margin: 3rem 0 4.5rem;
+            padding: 2.2rem 1.8rem;
+            text-align: center;
+            background: #f4f3f0;
+            border-radius: 28px;
+            border: 1px solid #e6e2dd;
+        }
+
+        .footer-note p {
+            font-size: 0.94rem;
+            color: #3f3d39;
+            max-width: 480px;
+            margin: 0 auto 0.6rem;
+        }
+
+        .footer-note a {
+            color: #1e2e25;
+            text-decoration: none;
+            border-bottom: 1px solid #b5bfb4;
+            font-weight: 400;
+            transition: border-color 0.2s, background 0.2s;
+            padding: 0.04rem 0.15rem;
+        }
+
+        .footer-note a:hover {
+            border-bottom-color: #1e2e25;
+            background: #eaeae5;
+            border-radius: 2px;
+        }
+
+        .footer-note__muted {
+            font-size: 0.8rem;
+            color: #888580;
+            margin-top: 0.6rem;
+            letter-spacing: 0.02em;
+        }
+
+        /* 响应式细节 */
+        @media (max-width: 520px) {
+            .hero {
+                padding: 3.8rem 0 2.5rem;
+            }
+            .hero__title {
+                font-size: 2.2rem;
+            }
+            .hero__sub {
+                font-size: 0.9rem;
+            }
+            .background-note {
+                padding: 1.6rem 1.2rem;
+            }
+            .background-note h2 {
+                font-size: 1.25rem;
+            }
+            .story-card h3 {
+                font-size: 1.1rem;
+            }
+            .footer-note {
+                padding: 1.8rem 1.2rem;
+                margin-bottom: 3.5rem;
+            }
+        }
+
+        @media (min-width: 800px) {
+            .magazine-wrapper {
+                max-width: 760px;
+            }
+            .background-note {
+                padding: 2.5rem 2.6rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #181715;
+                color: #eae8e3;
+            }
+            .hero__label {
+                background: #2a2925;
+                border-color: #3f3d38;
+                color: #bbb8b0;
+            }
+            .hero__title {
+                color: #f0ede7;
+            }
+            .hero__sub {
+                color: #b0aca4;
+            }
+            .hero__sep {
+                background: #5c5952;
+            }
+            .background-note {
+                background: #22201d;
+                box-shadow: 0 1px 6px rgba(0,0,0,0.4), 0 0 0 1px #383631 inset;
+            }
+            .background-note h2 {
+                color: #e6e2da;
+            }
+            .background-note p {
+                color: #cdc9c0;
+            }
+            .background-note a,
+            .story-card a,
+            .footer-note a {
+                color: #b1c2b2;
+                border-bottom-color: #5a6e59;
+            }
+            .background-note a:hover,
+            .story-card a:hover,
+            .footer-note a:hover {
+                color: #d6e3d0;
+                border-bottom-color: #849e81;
+            }
+            .story-card {
+                border-top-color: #373430;
+            }
+            .story-card h3 {
+                color: #e3dfd7;
+            }
+            .story-card p {
+                color: #c4bfb6;
+            }
+            .footer-note {
+                background: #24221f;
+                border-color: #3a3833;
+            }
+            .footer-note p {
+                color: #d0ccc2;
+            }
+            .footer-note__muted {
+                color: #8e8a80;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="magazine-wrapper">
+
+    <!-- 首页横幅 -->
+    <header class="hero">
+        <span class="hero__label">专题 · 稳定之页</span>
+        <h1 class="hero__title">爱游戏</h1>
+        <p class="hero__sub">一处可以安静抵达的角落，没有浮跳，只有清晰的路标。</p>
+        <span class="hero__sep"></span>
+    </header>
+
+    <!-- 背景说明 -->
+    <section class="background-note">
+        <h2>为什么需要一篇说明</h2>
+        <p>
+            这个网站的存在并不复杂——它更像一本翻开的杂志，专为那些对「<a href="https://index-app-i-game.com.cn">爱游戏</a>」感兴趣的人提供一份平实的索引。没有喧哗的弹窗，也没有过度的指引，你看到的每一段文字、每一个链接，都经过审慎的排列。
+        </p>
+        <p>
+            在信息流快速更迭的日常里，一个稳定的入口本身就是一种态度。我们不夸大它的作用，只是反复确认一件事：当你需要找到它时，它就在那里，界面干净，路径直接。
+        </p>
+    </section>
+
+    <!-- 三段自然介绍 -->
+    <div class="section-grid">
+
+        <article class="story-card">
+            <div class="story-card__number">01</div>
+            <h3>从杂志的语言开始</h3>
+            <p>
+                这个页面不追求大而全，而是像一本放在茶几上的读物，随手翻开就能找到你关心的内容。关于<a href="https://index-app-i-game.com.cn">爱游戏</a>的信息被拆解成自然的段落，没有强硬的推销，只有如实陈述。
+            </p>
+            <p>
+                每个块都有呼吸空间，字体间距经过微调，标题与正文之间保留了恰好的留白——这些都是为了让阅读本身变得轻快、不费力。
+            </p>
+        </article>
+
+        <article class="story-card">
+            <div class="story-card__number">02</div>
+            <h3>稳定的骨架，朴素的内里</h3>
+            <p>
+                技术层面这个页面非常轻量，没有复杂框架，没有多余脚本。它承载的核心任务就是为「<a href="https://index-app-i-game.com.cn">爱游戏</a>」提供一个可依赖的展示面。无论你用什么设备打开，卡片、分隔线、字体层次都自动适配。
+            </p>
+            <p>
+                我们特意让背景保持米白，正文宽度收窄到舒适范围，暗色模式同样经过调校——从白到黑，前后一致。
+            </p>
+        </article>
+
+        <article class="story-card">
+            <div class="story-card__number">03</div>
+            <h3>不是终点，是一个起点</h3>
+            <p>
+                对于初次到来的访客，这段介绍尽可能消除模糊感。而对于已经熟悉的人，它像一本杂志的卷首语，温和地提醒你：<a href="https://index-app-i-game.com.cn">爱游戏</a>依然保持初衷，没有杂乱的后台，只有清晰的章节。
+            </p>
+            <p>
+                接下来你看到的每一处链接、每一段文字，都延续着同一种节奏——不催促、不打扰，你随时可以停在这里，也随时可以继续往下翻。
+            </p>
+        </article>
+
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="footer-note">
+        <p>
+            如果你对这个专题感到熟悉，或是第一次遇见，都不妨顺着页面里的链接自然探入。<br>
+            所有内容都指向同一个地方——<a href="https://index-app-i-game.com.cn">爱游戏</a>，一个安静、直接、保持克制的站点。
+        </p>
+        <div class="footer-note__muted">— 杂志式介绍 · 无干扰阅读 —</div>
+    </footer>
+
+</div>
+</body>
+</html>
