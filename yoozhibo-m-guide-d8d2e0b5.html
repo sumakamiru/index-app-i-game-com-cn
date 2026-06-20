@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>优直播 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: #f5f2ed;  /* 米白基调 */
+            color: #2b2a27;
+            line-height: 1.7;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #faf8f5;
+            padding: 2.8rem 2.5rem;
+            border-radius: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.03), 0 2px 6px rgba(0,0,0,0.03);
+        }
+
+        /* 目录感布局 —— 隐形标题网格 */
+        .toc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem 2rem;
+            margin: 2rem 0 1.5rem;
+            padding: 0.2rem 0 1.2rem 0;
+            border-bottom: 1px solid #e2ddd6;
+        }
+
+        .toc-item {
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+            color: #5f5b55;
+            padding: 0.25rem 0;
+            border-bottom: 1px dashed #e5dfd7;
+            display: flex;
+            align-items: baseline;
+            gap: 0.6rem;
+        }
+
+        .toc-item::before {
+            content: "⊡";
+            color: #b0a89b;
+            font-size: 0.8rem;
+        }
+
+        /* hero */
+        .hero-title {
+            font-size: 2.4rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #1f1e1b;
+            margin-bottom: 0.2rem;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: #706b63;
+            margin-top: 0.1rem;
+            margin-bottom: 1.0rem;
+            border-left: 4px solid #d6cfc4;
+            padding-left: 1.2rem;
+        }
+
+        /* 文章排版段落 */
+        .article-body p {
+            margin-bottom: 1.25rem;
+            text-align: justify;
+            word-break: break-word;
+        }
+
+        .article-body a {
+            color: #2b5f4a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #bccbc0;
+            transition: color 0.15s;
+        }
+
+        .article-body a:hover {
+            color: #1d4a36;
+            text-decoration-color: #2b5f4a;
+        }
+
+        /* 引用块 / 提示框 */
+        .info-box {
+            background: #efebe6;
+            border-left: 5px solid #b7aa98;
+            padding: 1.4rem 1.8rem;
+            margin: 1.8rem 0;
+            border-radius: 0 12px 12px 0;
+            color: #2d2a25;
+            font-size: 0.98rem;
+        }
+
+        .info-box strong {
+            font-weight: 500;
+            color: #1a1a17;
+        }
+
+        .box-tip {
+            background: #e9e3da;
+            border-left: 5px solid #8f9d8a;
+            padding: 1.2rem 1.6rem;
+            margin: 1.8rem 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 0.95rem;
+        }
+
+        .box-tip::before {
+            content: "⚡ 提示  ";
+            font-weight: 500;
+            color: #4a5a45;
+        }
+
+        /* 相关信息区 —— 小卡片网格 */
+        .relate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2ddd6;
+        }
+
+        .relate-card {
+            background: #f3efe9;
+            padding: 1.1rem 1rem;
+            border-radius: 16px;
+            transition: background 0.1s;
+        }
+
+        .relate-card h4 {
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            color: #2d2a25;
+            letter-spacing: 0.01em;
+        }
+
+        .relate-card p {
+            font-size: 0.85rem;
+            color: #5f5a52;
+            line-height: 1.5;
+        }
+
+        /* faq 摘要 */
+        .faq-summary {
+            margin: 1.8rem 0 1rem;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #e9e2d9;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #1f1e1b;
+            display: flex;
+            gap: 0.6rem;
+        }
+
+        .faq-q::before {
+            content: "Q";
+            font-weight: 400;
+            color: #9a9082;
+            width: 1.6rem;
+        }
+
+        .faq-a {
+            margin-top: 0.25rem;
+            padding-left: 2.2rem;
+            color: #5a5650;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .container {
+                padding: 2rem 1.2rem;
+                border-radius: 24px;
+            }
+            .toc-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            .hero-title {
+                font-size: 1.9rem;
+            }
+            .relate-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+            .faq-a {
+                padding-left: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1.5rem 1rem;
+            }
+            .hero-title {
+                font-size: 1.7rem;
+            }
+            .info-box, .box-tip {
+                padding: 1rem 1.2rem;
+            }
+        }
+
+        /* 微细节：引用中的链接处理 */
+        .info-box a, .box-tip a {
+            color: #2b5f4a;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        /* 小字注释 */
+        .footnote {
+            margin-top: 2.2rem;
+            font-size: 0.78rem;
+            color: #9c958b;
+            text-align: right;
+            border-top: 1px solid #eae5dd;
+            padding-top: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero -->
+    <div class="hero-title">优直播 · 站内导航</div>
+    <div class="hero-sub">信息来源 · 功能索引 · 使用说明</div>
+
+    <!-- 目录感布局 -->
+    <div class="toc-grid">
+        <div class="toc-item">站点性质与背景</div>
+        <div class="toc-item">内容板块说明</div>
+        <div class="toc-item">使用前注意事项</div>
+        <div class="toc-item">常见疑问摘要</div>
+        <div class="toc-item">相关参考信息</div>
+        <div class="toc-item">数据与隐私说明</div>
+    </div>
+
+    <!-- 文章主体 -->
+    <div class="article-body">
+        <p>
+            <a href="https://yoozhibo-m.com">优直播</a> 是一个以信息聚合与互动呈现为主要功能的在线平台，面向对直播内容、多媒体资源及实时消息有获取需求的用户。本站作为独立介绍页，旨在梳理平台的基本结构、信息可信度说明以及常见使用场景，帮助访问者快速建立整体认知。
+        </p>
+        <p>
+            平台主要围绕直播流索引、节目单整理、频道分类与用户反馈几个模块展开，内容更新依赖于公开数据与用户贡献。所有出现在站内的链接、描述与预览均经过基础校验，但建议使用者结合其他来源交叉确认，尤其涉及活动时间、嘉宾名单或外部跳转时。以下分区提供更详细的参考。
+        </p>
+
+        <!-- 引用块：可信说明 -->
+        <div class="info-box">
+            <strong>可信说明</strong><br>
+            本站不存储直播源文件，不主动生成未经授权的版权内容。所有导航与信息均依据合理引用原则组织，原始出处标注于对应页面。若发现不准确或失效链接，可通过站内反馈渠道提交修正。平台不对第三方外部页面的内容与安全性承担责任。
+        </div>
+
+        <p>
+            从信息结构来看，<a href="https://yoozhibo-m.com">优直播</a> 采用分类目录与搜索结合的方式，按照频道类型、地区、语言及人气等维度排列。每个条目附带简短的描述与预览图，部分页面提供近期节目时间表。对于需要快速浏览的用户，首页聚合了当前活跃度较高的若干直播入口。
+        </p>
+
+        <!-- 提示区 -->
+        <div class="box-tip">
+            首次使用建议先查阅「常见疑问」部分，了解页面布局与交互逻辑；若遇到加载延迟或预览异常，可尝试更换网络环境或刷新页面。部分功能依赖浏览器对现代 JavaScript 的支持。
+        </div>
+
+        <p>
+            在适用场景上，<a href="https://yoozhibo-m.com">优直播</a> 适合日常内容消费、节目跟踪、以及兴趣社群交流。平台界面以清晰优先，减少冗余装饰，使注意力集中在内容列表与播放控件上。移动端访问同样保持基础可用性，但部分复杂筛选组件在窄屏下会折叠为简化模式。
+        </p>
+    </div>
+
+    <!-- FAQ 摘要 -->
+    <div class="faq-summary">
+        <div class="faq-item">
+            <div class="faq-q">平台是否需要注册才能使用？</div>
+            <div class="faq-a">浏览公开列表与预览无需账号；收藏、评论或自定义频道订阅可能需要简单注册，具体以实际页面提示为准。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">链接失效或内容不符如何处理？</div>
+            <div class="faq-a">建议先确认是否为临时性网络波动；若持续异常，可通过站内「反馈」入口描述问题，管理方会在周期内核查更新。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">是否支持多语言界面？</div>
+            <div class="faq-a">当前以中文为主要界面语言，部分频道描述可能包含原语种标题。暂无自动翻译集成。</div>
+        </div>
+    </div>
+
+    <!-- 相关信息区 -->
+    <div class="relate-grid">
+        <div class="relate-card">
+            <h4>内容分类</h4>
+            <p>娱乐 · 资讯 · 教育 · 游戏 · 音乐 · 生活 · 体育 · 访谈</p>
+        </div>
+        <div class="relate-card">
+            <h4>数据更新</h4>
+            <p>每日增量同步，频道状态每 30 分钟刷新一次，节目表依来源频次更新。</p>
+        </div>
+        <div class="relate-card">
+            <h4>隐私说明</h4>
+            <p>不追踪个人浏览行为，不保存观看记录，仅收集匿名访问统计用于改善服务。</p>
+        </div>
+    </div>
+
+    <!-- 脚注 / 无关字符串不会显示种子 -->
+    <div class="footnote">
+        介绍页版本 · 信息截止于最近一次同步
+    </div>
+</div>
+</body>
+</html>
