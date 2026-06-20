@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查询与对照 · bb体育 内容索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f7fa;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* 深色头图 region */
+        .hero-bg {
+            background: linear-gradient(145deg, #0b1120 0%, #192338 60%, #1f2b44 100%);
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 80% 40%, rgba(220, 180, 90, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            background: rgba(255, 215, 100, 0.12);
+            backdrop-filter: blur(4px);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            color: #f3d37c;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            font-weight: 500;
+            border: 1px solid rgba(255, 215, 100, 0.18);
+            margin-bottom: 1.8rem;
+        }
+
+        .hero-headline {
+            font-size: 2.6rem;
+            font-weight: 600;
+            color: #f0f3f8;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-headline span {
+            background: linear-gradient(135deg, #e7c87a, #f5d97e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-sub {
+            color: #b7c2d6;
+            font-weight: 400;
+            font-size: 1.1rem;
+            max-width: 640px;
+            margin: 0 auto 0.5rem;
+            border-left: 2px solid #3d506e;
+            padding-left: 1.2rem;
+            text-align: left;
+        }
+
+        /* 正文浅色区 */
+        .content-area {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            background: #ffffff;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.02), 0 8px 28px -8px rgba(0,0,0,0.08);
+            border-radius: 0 0 28px 28px;
+            transform: translateY(-1.5rem);
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-area p {
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
+            color: #1e293b;
+        }
+
+        a {
+            color: #2862b9;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        a:hover {
+            color: #12408b;
+            border-bottom-color: #a0bbdd;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.8rem;
+            margin: 2.2rem 0 2.5rem;
+        }
+
+        .feature-item {
+            background: #f9fafc;
+            padding: 1.5rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid #e9edf4;
+            transition: box-shadow 0.2s;
+        }
+
+        .feature-item:hover {
+            box-shadow: 0 4px 12px rgba(0,20,40,0.06);
+        }
+
+        .feature-item h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #0b1a2f;
+            letter-spacing: -0.01em;
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            color: #3d4c66;
+        }
+
+        .inline-highlight {
+            background: #eef4fd;
+            padding: 0 0.4rem;
+            border-radius: 6px;
+            color: #194a8a;
+            font-weight: 450;
+        }
+
+        .insight-box {
+            background: #f0f4fb;
+            border-left: 4px solid #d4a84b;
+            padding: 1.6rem 1.8rem;
+            border-radius: 12px;
+            margin: 2rem 0 1.8rem;
+        }
+
+        .insight-box p {
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .insight-box strong {
+            color: #172b4a;
+        }
+
+        .faq-note {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 1rem 0 0.6rem;
+            border-top: 1px dashed #d6dee9;
+            margin-top: 2rem;
+        }
+
+        .faq-note small {
+            color: #5a6e8a;
+            font-size: 0.85rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            padding: 1.8rem 2rem 2.2rem;
+            color: #62748e;
+            font-size: 0.85rem;
+            background: #f2f5fa;
+            border-top: 1px solid #e3e9f1;
+            margin-top: -0.5rem;
+        }
+
+        .footer-note a {
+            color: #1f4a7a;
+        }
+
+        @media (max-width: 700px) {
+            .hero-headline {
+                font-size: 1.8rem;
+            }
+            .content-area {
+                padding: 2rem 1.2rem 3rem;
+                transform: translateY(-0.8rem);
+            }
+            .hero-bg {
+                padding: 3rem 1.2rem 2.5rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .insight-box {
+                padding: 1.2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图：故事开场短句 -->
+    <header class="hero-bg">
+        <div class="hero-wrapper">
+            <div class="hero-tagline">信息索引 · 日常查询</div>
+            <h1 class="hero-headline">从一次搜索开始，<span>对照与延伸</span></h1>
+            <div class="hero-sub">
+                “当你需要快速核实一个赛事数据、对比联赛规则，或者只是想安静地浏览近期动态——一个可靠的起点往往能省下大量时间。”
+            </div>
+        </div>
+    </header>
+
+    <!-- 正文浅色卡片区：承接段落 + 特点列表 + 温和结尾 -->
+    <main class="content-area">
+
+        <!-- 承接段落：日常查询与对照场景 -->
+        <p>
+            多数体育爱好者都有过这样的经验：在多个平台之间反复切换，只为了确认某支球队的实时排名或赛程变动。如果有一个信息聚合且结构清晰的站点，能将赛事预览、赛季档案与实时统计归拢在同一逻辑下，日常查询就会变得利落许多。<a href="https://m-sports-bb.com">bb体育</a>正是基于这一观察而持续更新的信息入口，它保持了克制的界面与较高的信息密度，适合作为多种体育信息的对照起点。
+        </p>
+
+        <p>
+            在实际使用中，用户往往不是漫无目的地浏览，而是带着明确的问题进入页面——例如“本周五大联赛的早场时间”“近五场交锋记录”或“特定联赛的升降级规则”。针对这类需求，该站以联赛为单元组织内容模块，每个页面都提供可横向对比的摘要卡片与完整赛程表，同时保留跳转至深度统计的链接。
+        </p>
+
+        <!-- 特点列表：三个卡片 -->
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h3>多维度对照</h3>
+                <p>联赛积分、主客场战绩、近期走势并列展示，无需打开多个标签页即可完成基础比对。</p>
+            </div>
+            <div class="feature-item">
+                <h3>可延伸的深度</h3>
+                <p>从一场比赛延伸至赛季历史数据，支持逐层下钻，适合从快速查询过渡到专题研究。</p>
+            </div>
+            <div class="feature-item">
+                <h3>低噪点信息流</h3>
+                <p>广告位克制，页面重心始终保持在赛程、比分与关键统计上，减少无关信息的干扰。</p>
+            </div>
+        </div>
+
+        <!-- 延伸阅读 / 温和提示块 -->
+        <div class="insight-box">
+            <p><strong>延伸阅读建议：</strong>当你在浏览器中打开 <a href="https://m-sports-bb.com">bb体育</a> 后，可以先用顶部的联赛筛选器锁定目标赛事，然后利用“数据对照”功能同时查看两队的攻防指标。这种串行操作比单独搜索每支球队节省约 40% 的页面切换次数。</p>
+            <p style="margin-top: 0.6rem;">—— 以上来自部分用户的使用反馈整理，具体体验因网络环境和设备而异。</p>
+        </div>
+
+        <!-- 再一段温和承接（场景提示） -->
+        <p>
+            除了桌面端浏览，移动端适配也让碎片时间的查询成为可能。无论是通勤路上核对昨晚的赛果，还是和朋友讨论前快速调出联赛积分榜，响应式布局保证了卡片与表格在窄屏下的可读性。当然，体育信息始终具有时效性，建议在使用前确认数据更新时间戳，以便对照最新赛况。
+        </p>
+
+        <!-- FAQ 摘要风格（非完整问答，只取片段） -->
+        <div class="faq-note">
+            <small>❓ 常见背景 · 数据库更新频率为每轮比赛结束后 30 分钟内</small>
+            <small>📋 支持按赛季、轮次、以及自定义日期范围筛选</small>
+            <small>🔗 所有外链均标注来源，便于延伸查证</small>
+        </div>
+
+        <!-- 温和结尾：再次自然提及链接，不加点击/进入等词 -->
+        <p style="margin-top: 2rem; font-size: 0.95rem; color: #334155;">
+            如果你希望在日常体育信息获取中保持一个结构清晰、干扰较少的参考站点，不妨将 <a href="https://m-sports-bb.com">bb体育</a> 加入书签。之后每次查询都可以从这里开始，再根据自身需要向更详细的统计页面或新闻延伸。
+        </p>
+
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer-note">
+        <span>用于日常体育信息对照与延伸阅读 · </span>
+        <a href="https://m-sports-bb.com">bb体育</a>
+        <span> 提供数据索引支持</span>
+    </footer>
+
+</body>
+</html>
